@@ -1,61 +1,19 @@
-import React, { Component } from "react";
-import "./App.css";
-import Person from "./Person/Person";
+import React, { Component } from 'react';
+import './App.css';
 
 class App extends Component {
-  state = {
-    persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
-    ],
-    otherState: "some other value",
-  };
-
-  switchNameHandler = (newName) => {
-    // We should not change the states using
-    // this.state.persons[0].name = ''
-    // This will only set the state for persons
-    // not for otherstate
-    this.setState({
-      persons: [
-        { name: newName, age: 25 },
-        { name: "Manu", age: 29 },
-      ],
-    });
-    console.log("Was clicked");
-  };
-
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: event.target.value, age: 42 },
-        { name: "Max", age: 25 },
-        // Assign a new name
-      ],
-    });
-  };
-
   render() {
     return (
       <div className="App">
-        <h1>Hi, I'm a React App</h1>
-        <p>This is really working!</p>
-        {/* onClick to show this is a react button not Javascript*/}
-        <button onClick={this.switchNameHandler.bind(this, "Maximilian")}>
-          Switch Name
-        </button>
-        <Person
-          name="Ben"
-          age="21"
-          click={this.switchNameHandler.bind(this, "Max!")}
-          changed={this.nameChangedHandler}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "Bound click")}
-          changed={this.nameChangedHandler}
-        />
+        <ol>
+          <li>Create an input field (in App component) with a change listener which outputs the length of the entered text below it (e.g. in a paragraph).</li>
+          <li>Create a new component (=> ValidationComponent) which receives the text length as a prop</li>
+          <li>Inside the ValidationComponent, either output "Text too short" or "Text long enough" depending on the text length (e.g. take 5 as a minimum length)</li>
+          <li>Create another component (=> CharComponent) and style it as an inline box (=> display: inline-block, padding: 16px, text-align: center, margin: 16px, border: 1px solid black).</li>
+          <li>Render a list of CharComponents where each CharComponent receives a different letter of the entered text (in the initial input field) as a prop.</li>
+          <li>When you click a CharComponent, it should be removed from the entered text.</li>
+        </ol>
+        <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
       </div>
     );
   }
