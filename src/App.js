@@ -1,33 +1,45 @@
-import React, { Component } from 'react';
-import './App.css';
-import ValidationComponent from './ValidationComponent/ValidationComponent';
+import React, { Component } from "react";
+import "./App.css";
+import ValidationComponent from "./ValidationComponent/ValidationComponent";
+import CharComponent from "./CharComponent/CharComponent";
 
 class App extends Component {
   state = {
-    lengthInput: 0
-  }
+    input: '',
+  };
   onChangeLenHandler = (event) => {
-    const val = event.target.value;
-    const newLength = val.length
-    this.setState({lengthInput: newLength})
+    this.setState({input: event.target.value});
+  };
+
+  deleteHandler = (index) => {
+    const input = [...this.state.input];
+    // Remove character component associated
+    input.splice(index, 1);
+    // Reform the string as it was an 
+    // const updated = input.join('');
+    // Update the state of the input
+    // as it was a list
+    this.setState({input: input});
   }
 
   render() {
-    let lenInput = null;
     return (
       <div className="App">
-        <ol>
-          <li>Create an input field (in App component) with a change listener which outputs the length of the entered text below it (e.g. in a paragraph).</li>
-          <li>Create a new component (=> ValidationComponent) which receives the text length as a prop</li>
-          <li>Inside the ValidationComponent, either output "Text too short" or "Text long enough" depending on the text length (e.g. take 5 as a minimum length)</li>
-          <li>Create another component (=> CharComponent) and style it as an inline box (=> display: inline-block, padding: 16px, text-align: center, margin: 16px, border: 1px solid black).</li>
-          <li>Render a list of CharComponents where each CharComponent receives a different letter of the entered text (in the initial input field) as a prop.</li>
-          <li>When you click a CharComponent, it should be removed from the entered text.</li>
-        </ol>
-        <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
-        <input type="text" onChange={(event) => this.onChangeLenHandler(event)}/>
-        <p>The text above has a length of {this.state.lengthInput}</p>
-        <ValidationComponent textLength={this.state.lengthInput}/>
+        <input
+          type="text"
+          onChange={this.onChangeLenHandler}
+          value={this.state.input}
+        />
+        <p>The text above has a length of {this.state.input.length}</p>
+  
+        <ValidationComponent textLength={this.state.input.length} />
+        {this.state.input.split('').map((c, index) => {
+          return <CharComponent 
+          singleChar={this.state.input[index]}
+          click={() => this.deleteHandler(index)}
+          key={index}
+          />;
+        })}
       </div>
     );
   }

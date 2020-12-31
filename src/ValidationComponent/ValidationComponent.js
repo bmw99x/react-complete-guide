@@ -9,7 +9,7 @@ const ValidationComponent = (props) => {
     if (textLength > 5) {
       textOutput = "Text long enough";
     }
-    if (textLength < 5) {
+    if (textLength <= 5) {
       textOutput = "Text too short";
     }
   }
