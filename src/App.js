@@ -16,10 +16,10 @@ class App extends Component {
     // Remove character component associated
     input.splice(index, 1);
     // Reform the string as it was an 
-    // const updated = input.join('');
+    const updated = input.join('');
     // Update the state of the input
     // as it was a list
-    this.setState({input: input});
+    this.setState({input: updated});
   }
 
   render() {
